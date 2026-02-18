@@ -70,10 +70,10 @@ export const ChatWidget: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end max-w-full">
+    <div className="absolute inset-0 pointer-events-none flex flex-col items-end justify-end p-6">
       {/* Chat Window */}
       {isOpen && (
-        <div className="mb-4 w-[calc(100vw-3rem)] sm:w-[400px] h-[min(600px,calc(100vh-8rem))] bg-white/95 backdrop-blur-xl rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.15)] border border-zinc-200/50 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)]">
+        <div className="pointer-events-auto mb-4 w-full max-w-[400px] h-[min(600px,calc(100vh-8rem))] bg-white/95 backdrop-blur-xl rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.15)] border border-zinc-200/50 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)]">
           
           {/* Header */}
           <div className="px-8 py-6 bg-zinc-950 text-white flex items-center justify-between relative overflow-hidden shrink-0">
@@ -96,6 +96,7 @@ export const ChatWidget: React.FC = () => {
             <div className="flex items-center gap-2 relative z-10">
               <button 
                 onClick={handleClearChat}
+                type="button"
                 title="Clear Chat"
                 className="w-8 h-8 flex items-center justify-center hover:bg-white/10 rounded-full transition-all duration-300 group"
               >
@@ -105,6 +106,7 @@ export const ChatWidget: React.FC = () => {
               </button>
               <button 
                 onClick={() => setIsOpen(false)}
+                type="button"
                 title="Close"
                 className="w-8 h-8 flex items-center justify-center hover:bg-white/10 rounded-full transition-all duration-300"
               >
@@ -159,8 +161,9 @@ export const ChatWidget: React.FC = () => {
       {/* Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
+        type="button"
         className={`
-          relative w-14 h-14 rounded-2xl flex items-center justify-center shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 cubic-bezier(0.19,1,0.22,1) hover:scale-105 active:scale-95
+          pointer-events-auto relative w-14 h-14 rounded-2xl flex items-center justify-center shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 cubic-bezier(0.19,1,0.22,1) hover:scale-105 active:scale-95
           ${isOpen ? 'bg-zinc-950 rotate-90 rounded-full shadow-none' : 'bg-black'}
         `}
       >
