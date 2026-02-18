@@ -4,13 +4,11 @@ import { ChatWidget } from './components/ChatWidget';
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-transparent">
-      {/* 
-        This is a minimal container. 
-        In a real website embed, this component would be rendered 
-        into a small div or directly into the body.
-      */}
-      <ChatWidget />
+    <div className="fixed inset-0 pointer-events-none min-h-0 min-w-0">
+      {/* Widget is the only visible content; container takes no layout space for embed */}
+      <div className="pointer-events-auto">
+        <ChatWidget />
+      </div>
     </div>
   );
 };
