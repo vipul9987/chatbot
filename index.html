@@ -1,24 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" style="background: transparent !important;">
+<html lang="en" style="background: transparent !important; background-color: transparent !important;">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Widget Assistant</title>
+    <title>AI Assistant Widget</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-      /* CRITICAL: Force transparency for the iframe environment */
+      /* FORCE TRANSPARENCY ON ALL ROOT ELEMENTS */
+      :root {
+        color-scheme: only light; /* Prevents browser-injected backgrounds */
+      }
+
       html, body, #root {
         background: transparent !important;
         background-color: transparent !important;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        /* Ghost Mode: The iframe body doesn't block clicks to the parent site */
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        overflow: hidden !important;
+        /* GHOST MODE: Clicks pass through empty space */
         pointer-events: none; 
       }
 
@@ -28,7 +32,7 @@
         box-sizing: border-box;
       }
 
-      /* Re-enable clicks ONLY for the widget elements */
+      /* ENABLE CLICKS only for the widget */
       .interactive {
         pointer-events: auto !important;
       }
@@ -40,7 +44,7 @@
       }
 
       .custom-scrollbar::-webkit-scrollbar {
-        width: 5px;
+        width: 4px;
       }
       .custom-scrollbar::-webkit-scrollbar-track {
         background: transparent;
@@ -57,6 +61,14 @@
       .animate-widget-in {
         animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       }
+
+      body {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      body::-webkit-scrollbar {
+        display: none;
+      }
     </style>
     <script type="importmap">
     {
@@ -69,8 +81,8 @@
     }
     </script>
   </head>
-  <body>
-    <div id="root"></div>
+  <body style="background: transparent !important; background-color: transparent !important;">
+    <div id="root" style="background: transparent !important;"></div>
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>
