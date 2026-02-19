@@ -57,7 +57,7 @@ export const ChatWidget: React.FC = () => {
       
       {/* Premium Chat Window popup */}
       {isOpen && (
-        <div className="interactive mb-6 w-full max-w-[400px] h-[640px] max-h-[85vh] glass-panel rounded-[2.5rem] shadow-[0_40px_120px_-20px_rgba(0,0,0,0.3)] border border-white/50 flex flex-col overflow-hidden animate-widget-in origin-bottom-right">
+        <div className="interactive mb-6 w-full max-w-[400px] h-[640px] max-h-[85vh] glass-panel rounded-[3rem] shadow-[0_40px_120px_-20px_rgba(0,0,0,0.3)] border border-white/50 flex flex-col overflow-hidden animate-widget-in origin-bottom-right">
           
           {/* Header */}
           <div className="px-8 py-7 bg-[#0a0a0a] text-white flex items-center justify-between shrink-0">
@@ -87,13 +87,13 @@ export const ChatWidget: React.FC = () => {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-6 bg-[#f8f9fa]">
+          <div className="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-6 bg-white">
             {messages.map((msg) => (
               <ChatBubble key={msg.id} message={msg} />
             ))}
             {chatState === ChatState.TYPING && (
               <div className="flex justify-start">
-                <div className="bg-white px-5 py-3.5 rounded-2xl border border-zinc-100 shadow-sm flex gap-1.5 items-center">
+                <div className="bg-zinc-50 px-5 py-3.5 rounded-2xl border border-zinc-100 shadow-sm flex gap-1.5 items-center">
                   <div className="w-1.5 h-1.5 bg-zinc-300 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
                   <div className="w-1.5 h-1.5 bg-zinc-300 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
                   <div className="w-1.5 h-1.5 bg-zinc-300 rounded-full animate-bounce"></div>
@@ -103,20 +103,22 @@ export const ChatWidget: React.FC = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input */}
-          <div className="p-6 bg-white border-t border-zinc-100">
+          {/* Redesigned Input to match reference */}
+          <div className="px-6 pb-8 pt-2 bg-white">
             <form onSubmit={handleSend} className="relative flex items-center">
               <input
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Ask your question..."
-                className="w-full pl-6 pr-14 py-4.5 bg-zinc-100/50 border border-transparent rounded-[1.25rem] text-[15px] focus:outline-none focus:bg-white focus:border-blue-500/20 transition-all placeholder:text-zinc-400"
+                className="w-full pl-6 pr-16 py-4 bg-zinc-100/60 border border-transparent rounded-full text-[15px] focus:outline-none focus:bg-zinc-100 focus:ring-0 transition-all placeholder:text-zinc-400 font-medium"
               />
               <button
                 type="submit"
                 disabled={!inputValue.trim() || chatState === ChatState.TYPING}
-                className="absolute right-2.5 w-11 h-11 bg-zinc-950 text-white rounded-xl flex items-center justify-center hover:bg-blue-600 active:scale-95 transition-all disabled:opacity-20 shadow-md"
+                className={`absolute right-1.5 w-12 h-12 rounded-2xl flex items-center justify-center transition-all disabled:opacity-30 shadow-md ${
+                  inputValue.trim() ? 'bg-zinc-950 text-white' : 'bg-zinc-300 text-white'
+                }`}
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -127,10 +129,10 @@ export const ChatWidget: React.FC = () => {
         </div>
       )}
 
-      {/* Signature Blue-Ring Toggle Button */}
+      {/* Signature Blue-Ring Toggle Button - Fixed to remain a perfect circle */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`interactive relative group w-16 h-16 rounded-full flex items-center justify-center shadow-[0_20px_60px_rgba(0,0,0,0.3)] transition-all duration-500 transform active:scale-90 ${
+        className={`interactive relative group w-16 h-16 flex-shrink-0 aspect-square rounded-full flex items-center justify-center shadow-[0_20px_60px_rgba(0,0,0,0.3)] transition-all duration-500 transform active:scale-90 ${
           isOpen ? 'bg-[#0a0a0a] rotate-180' : 'bg-[#0a0a0a] hover:scale-110'
         }`}
       >
@@ -147,7 +149,7 @@ export const ChatWidget: React.FC = () => {
           </svg>
         ) : (
           <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 15l7-7 7 7" />
           </svg>
         )}
       </button>
