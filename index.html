@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Premium Chat Widget</title>
+    <title>Widget Assistant</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-      /* The critical fix for iframe transparency */
+      /* CRITICAL: Force transparency for the iframe environment */
       html, body, #root {
         background: transparent !important;
         background-color: transparent !important;
@@ -18,15 +18,17 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
-        pointer-events: none; /* Allows clicks to pass through to the parent site */
+        /* Ghost Mode: The iframe body doesn't block clicks to the parent site */
+        pointer-events: none; 
       }
 
       * {
         font-family: 'Outfit', sans-serif;
         -webkit-font-smoothing: antialiased;
+        box-sizing: border-box;
       }
 
-      /* Re-enable clicks only for the actual widget elements */
+      /* Re-enable clicks ONLY for the widget elements */
       .interactive {
         pointer-events: auto !important;
       }
@@ -37,7 +39,6 @@
         -webkit-backdrop-filter: blur(20px);
       }
 
-      /* Custom scrollbar for a cleaner look */
       .custom-scrollbar::-webkit-scrollbar {
         width: 5px;
       }
@@ -49,12 +50,12 @@
         border-radius: 10px;
       }
 
-      @keyframes pop-in {
-        0% { transform: scale(0.95) translateY(10px); opacity: 0; }
+      @keyframes slide-up {
+        0% { transform: scale(0.9) translateY(40px); opacity: 0; }
         100% { transform: scale(1) translateY(0); opacity: 1; }
       }
-      .animate-pop-in {
-        animation: pop-in 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      .animate-widget-in {
+        animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       }
     </style>
     <script type="importmap">
